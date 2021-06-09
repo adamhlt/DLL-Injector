@@ -13,4 +13,4 @@ Vous pouvez tester l'injecteur avec les fichiers fournis dans le dossier "Releas
     inject.exe test.dll test.exe
 La commande ci-dessus vous permet de tester l'injecteur avec les fichiers fournis.
 ### Démonstration
-![Démontration de l'injecteur de DLL.](https://github.com/LOURRS/DLL-Injector/blob/main/Ressource/demo.gif)
+![Démontration de l'injecteur de DLL.](https://github.com/adamhlt/DLL-Injector/blob/main/Ressource/demo.gif)

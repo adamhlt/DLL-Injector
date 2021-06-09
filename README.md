@@ -8,7 +8,7 @@ Les commentaires dans les sources n'expliquent pas en détail le fonctionnement 
 Cet injecteur s'utilise en ligne de commande de façon très simple.
 
     inject.exe <dll> <process>
-Vous pouvez tester l'injecteur avec les fichiers fournis dans le dossier "Release", les deux architectures (x86 et x64) sont présentes.
+Vous pouvez tester l'injecteur avec les fichiers fournis dans la section "Release", les deux architectures (x86 et x64) sont présentes.
 
     inject.exe test.dll test.exe
 La commande ci-dessus vous permet de tester l'injecteur avec les fichiers fournis.

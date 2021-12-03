@@ -111,7 +111,7 @@ int main(const int argc, char* argv[])
         return -1;
     }
 
-    printf("LoadLibraryA address at 0x%X\n", (UINT)lpFunctionAddress);
+    printf("LoadLibraryA address at 0x%X\n", (UINT)(uintptr_t)lpFunctionAddress);
 
     const HANDLE hThreadCreationResult = CreateRemoteThread(hTargetProcess, nullptr, 0, (LPTHREAD_START_ROUTINE)lpFunctionAddress, lpPathAddress, 0, nullptr);
     if (hThreadCreationResult == INVALID_HANDLE_VALUE)

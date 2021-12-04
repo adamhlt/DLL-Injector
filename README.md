@@ -46,3 +46,7 @@ Use it in the command line :
 **You can get the DLL injector (x86 / x64) and the test files (x86 / x64) in the "Release" section.**
 
 ### Demonstration :
+
+**DLL injector tested on x86 test files :**
+
+![Demo](https://github.com/adamhlt/DLL-Injector/blob/main/Ressource/demo.gif)

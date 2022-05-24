@@ -47,6 +47,6 @@ Use it in the command line :
 
 ### Demonstration :
 
-**DLL injector tested on x86 test files :**
+### TEST FILES (x86)
 
-![Demo](https://github.com/adamhlt/DLL-Injector/blob/main/Ressource/demo.gif)
+https://user-images.githubusercontent.com/48086737/170119196-8610ee0b-984e-4a42-a931-007dccd3d8c0.mp4

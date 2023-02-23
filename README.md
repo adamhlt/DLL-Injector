@@ -19,7 +19,8 @@ The "Release" section contains the DLL injector (x86 / x64) and tiny test progra
 
 Every configuration in x86 / x64 (Debug and Realese) are already configured.
 
-**It is necessary to build it in x86 or x64, it depends of the target process's architecture.**
+> **Warning** <br>
+> It is necessary to build it in x86 or x64, it depends of the target process's architecture.
 
 ### Other IDE using CMAKE :
 

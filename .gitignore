@@ -32,9 +32,3 @@ x86/
 *.obj
 *.exe
 *.dll
-
-# CMake
-CMakeCache.txt
-CMakeFiles/
-cmake_install.cmake
-CMakeUserPresets.json

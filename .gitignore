@@ -1,0 +1,40 @@
+# Build output
+/build/
+/out/
+[Bb]in/
+[Oo]bj/
+
+# Per-configuration output directories
+Debug/
+Release/
+x64/
+x86/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+*.aps
+
+# Build intermediates and binaries
+*.tlog
+*.recipe
+*.iobj
+*.ipdb
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.obj
+*.exe
+*.dll
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CMakeUserPresets.json

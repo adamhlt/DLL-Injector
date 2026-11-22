@@ -19,36 +19,51 @@
 
 ## :open_book: Project Overview :
 
-This is a DLL injector written in C++, it uses the most basic method to inject DLL (LoadLibrary).
+This is a DLL injector written in C++, it uses the most basic method to inject a DLL (LoadLibrary).
 
 The "Release" section contains the DLL injector (x86 / x64) and tiny test programs (x86 / x64).
+
+## :file_folder: Project Structure :
+
+```
+.
+├── CMakeLists.txt              CMake build (recommended for other IDEs / CLI)
+├── include/injector/           Public headers of the injector library
+│   ├── error.hpp               FormatError / FormatLastError
+│   ├── injector.hpp            InjectDll
+│   └── process.hpp             FindProcessId
+├── src/                        Implementation and command-line front end
+│   ├── cli.{hpp,cpp}           Argument parsing and usage text
+│   ├── error.cpp
+│   ├── injector.cpp
+│   ├── main.cpp                wmain entry point
+│   ├── process.cpp
+│   └── unique_handle.hpp       Internal RAII handle wrapper
+└── Source/                     Visual Studio solution and project
+```
 
 ## 🚀 Getting Started :
 
 ### Visual Studio :
 
-1. Open the solution file (.sln).
-2. Build the project in Realese (x86) or Release (x64).
+1. Open the solution file (`.sln`).
+2. Build the project in Release (x86) or Release (x64).
 
-Every configuration in x86 / x64 (Debug and Realese) are already configured.
+Every configuration in x86 / x64 (Debug and Release) is already configured.
 
 > **Warning** <br>
-> It is necessary to build it in x86 or x64, it depends of the target process's architecture.
+> The injector architecture must match the target process's architecture. An x86 injector cannot inject a 64-bit process and vice versa. The program detects a mismatch and reports it.
 
-### Other IDE using CMAKE :
+### Other IDE using CMake :
 
-This **CMakeLists.txt** should compile the project.
+A `CMakeLists.txt` is provided at the root of the repository:
 
-```cmake
-cmake_minimum_required(VERSION 3.0)
-project(Basic_DLL_Injector)
-
-set(CMAKE_CXX_STANDARD 17)
-
-add_executable(inject DLL_Injector.cpp)
+```bash
+cmake -S . -B build
+cmake --build build --config Release
 ```
 
-Tested on CLion with MSVC compiler, you can get Visual Studio Build Tools [**here**](https://visualstudio.microsoft.com/fr/downloads/?q=build+tools).
+Tested on CLion with the MSVC compiler, you can get the Visual Studio Build Tools [**here**](https://visualstudio.microsoft.com/fr/downloads/?q=build+tools).
 
 ## 🧪 Usage :
 
@@ -57,7 +72,28 @@ Tested on CLion with MSVC compiler, you can get Visual Studio Build Tools [**her
 Use it in the command line :
 
     inject.exe <dll> <process>
+
+- `<dll>` : path to the DLL to inject (absolute or relative).
+- `<process>` : target executable name (e.g. `notepad.exe`) or a numeric PID.
+
+    inject.exe test.dll notepad.exe
+    inject.exe test.dll 1234
+
+Use `-h` / `--help` to display the usage.
+
+### Exit codes :
+
+| Code | Meaning                                     |
+|-----:|---------------------------------------------|
+| 0    | Success                                     |
+| 1    | Usage error, process not found or injection failure |
+
 **You can get the DLL injector (x86 / x64) and the test files (x86 / x64) in the "Release" section.**
+
+### Limitations :
+
+- The injector uses `LoadLibrary`, which is the most detectable injection technique; security products commonly flag it.
+- On 64-bit builds, the module handle returned by `LoadLibrary` is truncated to 32 bits by the remote thread exit code. The injection result (success or failure) is still reliable.
 
 ### Demonstration :
 

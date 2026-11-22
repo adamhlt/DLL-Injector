@@ -36,7 +36,7 @@ https://user-images.githubusercontent.com/48086737/170119196-8610ee0b-984e-4a42-
 **Code**
 - Reusable library in `include/injector/` and `src/`
 - RAII handle wrapper, no leaked handles
-- Visual Studio solution and CMake build
+- Visual Studio solution
 
 ## Usage
 
@@ -72,42 +72,12 @@ Use `-h` / `--help` to display the usage.
 - `LoadLibrary` is the most detectable injection technique; security products commonly flag it.
 - On 64-bit builds, the module handle returned by `LoadLibrary` is truncated to 32 bits by the remote thread exit code. The injection result (success or failure) is still reliable.
 
-## Project structure
-
-```
-.
-├── CMakeLists.txt              CMake build
-├── include/injector/           Public headers of the injector library
-│   ├── error.hpp               FormatError / FormatLastError
-│   ├── injector.hpp            InjectDll
-│   └── process.hpp             FindProcessId
-├── src/                        Implementation and command-line front end
-│   ├── cli.{hpp,cpp}           Argument parsing and usage text
-│   ├── error.cpp
-│   ├── injector.cpp
-│   ├── main.cpp                wmain entry point
-│   ├── process.cpp
-│   └── unique_handle.hpp       Internal RAII handle wrapper
-└── Source/                     Visual Studio solution and project
-```
-
 ## Build
-
-**Visual Studio**
 
 1. Open `Source/DLL Injector.sln`.
 2. Build in Release (x86 or x64).
 
 Every configuration is already set up.
-
-**CMake**
-
-```bash
-cmake -S . -B build
-cmake --build build --config Release
-```
-
-Tested on CLion with the MSVC compiler, the Visual Studio Build Tools are available [here](https://visualstudio.microsoft.com/downloads/?q=build+tools).
 
 ## License
 

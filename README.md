@@ -83,10 +83,13 @@ Use `-h` / `--help` to display the usage.
 
 ### Exit codes :
 
-| Code | Meaning                                     |
-|-----:|---------------------------------------------|
-| 0    | Success                                     |
-| 1    | Usage error, process not found or injection failure |
+| Code | Meaning                        |
+|-----:|--------------------------------|
+| 0    | Success                        |
+| 1    | Usage error                    |
+| 2    | Process not found              |
+| 3    | DLL path could not be resolved |
+| 4    | Injection failed               |
 
 **You can get the DLL injector (x86 / x64) and the test files (x86 / x64) in the "Release" section.**
 

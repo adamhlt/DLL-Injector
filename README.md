@@ -1,33 +1,82 @@
+<div align="center">
+
+# DLL Injector
+
+**LoadLibrary DLL injector in C++ (x86 / x64)**
+
+![Language](https://img.shields.io/badge/C%2B%2B-16171C?logo=cplusplus)
+![Platform](https://img.shields.io/badge/Windows-16171C)
+![Arch](https://img.shields.io/badge/x86%20%7C%20x64-16171C)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-16171C)](LICENSE)
+
+</div>
+
+---
+
+DLL Injector loads a DLL into a running Windows process using the most basic technique: a remote thread that calls `LoadLibraryW`.
+
+The code is split into a small injector library and a thin command-line front end, so you can use it as a tool or reuse the library in your own project.
+
+### Example
+https://user-images.githubusercontent.com/48086737/170119196-8610ee0b-984e-4a42-a931-007dccd3d8c0.mp4
+
+## Features
+
+**Targets**
+- x86 and x64, Debug and Release
+- Target a process by executable name or by PID
+- Test programs (x86 / x64) available in the "Release" section
+
+**Injection**
+- Waits for the remote thread and reports the injection outcome
+- Detects an architecture mismatch between the injector and the target
+- Unicode entry point and wide Win32 APIs, with readable error messages
+- Distinct exit codes for scripting
+
+**Code**
+- Reusable library in `include/injector/` and `src/`
+- RAII handle wrapper, no leaked handles
+- Visual Studio solution and CMake build
+
+## Usage
+
 ```
-                       ____  __    __       ____        _           __            
-                      / __ \/ /   / /      /  _/___    (_)__  _____/ /_____  _____
-                     / / / / /   / /       / // __ \  / / _ \/ ___/ __/ __ \/ ___/
-                    / /_/ / /___/ /___   _/ // / / / / /  __/ /__/ /_/ /_/ / /  
-                   /_____/_____/_____/  /___/_/ /_/_/ /\___/\___/\__/\____/_/  
-                                                /___/                        
-
-
-                            DLL Injector (LoadLibrary) in C++ (x86 / x64) 
-                                      LoadLibrary DLL Injector
+inject.exe <dll> <process>
 ```
-<p align="center">
-    <img src="https://img.shields.io/badge/language-C%2B%2B-%23f34b7d.svg?style=for-the-badge&logo=appveyor" alt="C++">
-    <img src="https://img.shields.io/badge/platform-Windows-0078d7.svg?style=for-the-badge&logo=appveyor" alt="Windows">
-    <img src="https://img.shields.io/badge/arch-x86-red.svg?style=for-the-badge&logo=appveyor" alt="x86">
-    <img src="https://img.shields.io/badge/arch-x64-green.svg?style=for-the-badge&logo=appveyor" alt="x64">
-</p>
 
-## :open_book: Project Overview :
+- `<dll>`: path to the DLL to inject (absolute or relative).
+- `<process>`: target executable name (e.g. `notepad.exe`) or a numeric PID.
 
-This is a DLL injector written in C++, it uses the most basic method to inject a DLL (LoadLibrary).
+```
+inject.exe test.dll notepad.exe
+inject.exe test.dll 1234
+```
 
-The "Release" section contains the DLL injector (x86 / x64) and tiny test programs (x86 / x64).
+Use `-h` / `--help` to display the usage.
 
-## :file_folder: Project Structure :
+> [!WARNING]
+> The injector architecture must match the target process's architecture. An x86 injector cannot inject a 64-bit process and vice versa. The program detects a mismatch and reports it.
+
+### Exit codes
+
+| Code | Meaning                        |
+|-----:|--------------------------------|
+| 0    | Success                        |
+| 1    | Usage error                    |
+| 2    | Process not found              |
+| 3    | DLL path could not be resolved |
+| 4    | Injection failed               |
+
+### Limitations
+
+- `LoadLibrary` is the most detectable injection technique; security products commonly flag it.
+- On 64-bit builds, the module handle returned by `LoadLibrary` is truncated to 32 bits by the remote thread exit code. The injection result (success or failure) is still reliable.
+
+## Project structure
 
 ```
 .
-├── CMakeLists.txt              CMake build (recommended for other IDEs / CLI)
+├── CMakeLists.txt              CMake build
 ├── include/injector/           Public headers of the injector library
 │   ├── error.hpp               FormatError / FormatLastError
 │   ├── injector.hpp            InjectDll
@@ -42,64 +91,24 @@ The "Release" section contains the DLL injector (x86 / x64) and tiny test progra
 └── Source/                     Visual Studio solution and project
 ```
 
-## 🚀 Getting Started :
+## Build
 
-### Visual Studio :
+**Visual Studio**
 
-1. Open the solution file (`.sln`).
-2. Build the project in Release (x86) or Release (x64).
+1. Open `Source/DLL Injector.sln`.
+2. Build in Release (x86 or x64).
 
-Every configuration in x86 / x64 (Debug and Release) is already configured.
+Every configuration is already set up.
 
-> **Warning** <br>
-> The injector architecture must match the target process's architecture. An x86 injector cannot inject a 64-bit process and vice versa. The program detects a mismatch and reports it.
-
-### Other IDE using CMake :
-
-A `CMakeLists.txt` is provided at the root of the repository:
+**CMake**
 
 ```bash
 cmake -S . -B build
 cmake --build build --config Release
 ```
 
-Tested on CLion with the MSVC compiler, you can get the Visual Studio Build Tools [**here**](https://visualstudio.microsoft.com/fr/downloads/?q=build+tools).
+Tested on CLion with the MSVC compiler, the Visual Studio Build Tools are available [here](https://visualstudio.microsoft.com/downloads/?q=build+tools).
 
-## 🧪 Usage :
+## License
 
-### How to use the program :
-
-Use it in the command line :
-
-    inject.exe <dll> <process>
-
-- `<dll>` : path to the DLL to inject (absolute or relative).
-- `<process>` : target executable name (e.g. `notepad.exe`) or a numeric PID.
-
-    inject.exe test.dll notepad.exe
-    inject.exe test.dll 1234
-
-Use `-h` / `--help` to display the usage.
-
-### Exit codes :
-
-| Code | Meaning                        |
-|-----:|--------------------------------|
-| 0    | Success                        |
-| 1    | Usage error                    |
-| 2    | Process not found              |
-| 3    | DLL path could not be resolved |
-| 4    | Injection failed               |
-
-**You can get the DLL injector (x86 / x64) and the test files (x86 / x64) in the "Release" section.**
-
-### Limitations :
-
-- The injector uses `LoadLibrary`, which is the most detectable injection technique; security products commonly flag it.
-- On 64-bit builds, the module handle returned by `LoadLibrary` is truncated to 32 bits by the remote thread exit code. The injection result (success or failure) is still reliable.
-
-### Demonstration :
-
-### TEST FILES (x86)
-
-https://user-images.githubusercontent.com/48086737/170119196-8610ee0b-984e-4a42-a931-007dccd3d8c0.mp4
+This project is licensed under the [GNU GPLv3](LICENSE).

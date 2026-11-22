@@ -1,6 +1,6 @@
-#include "injector/injector.hpp"
+#include "injector.hpp"
 
-#include "injector/error.hpp"
+#include "error.hpp"
 #include "unique_handle.hpp"
 
 #include <string>

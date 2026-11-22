@@ -1,4 +1,4 @@
-#include "injector/error.hpp"
+#include "error.hpp"
 
 namespace injector
 {

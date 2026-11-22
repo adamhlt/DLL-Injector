@@ -11,36 +11,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\cli.cpp">
+    <ClCompile Include="src\cli.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\error.cpp">
+    <ClCompile Include="src\error.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\injector.cpp">
+    <ClCompile Include="src\injector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\process.cpp">
+    <ClCompile Include="src\process.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\injector\error.hpp">
+    <ClInclude Include="src\error.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\injector\injector.hpp">
+    <ClInclude Include="src\injector.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\injector\process.hpp">
+    <ClInclude Include="src\process.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\cli.hpp">
+    <ClInclude Include="src\cli.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\unique_handle.hpp">
+    <ClInclude Include="src\unique_handle.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

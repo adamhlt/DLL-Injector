@@ -1,7 +1,7 @@
 #include "cli.hpp"
-#include "injector/error.hpp"
-#include "injector/injector.hpp"
-#include "injector/process.hpp"
+#include "error.hpp"
+#include "injector.hpp"
+#include "process.hpp"
 
 #include <Windows.h>
 

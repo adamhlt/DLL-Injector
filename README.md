@@ -74,7 +74,7 @@ Use `-h` / `--help` to display the usage.
 
 ## Build
 
-1. Open `Source/DLL Injector.sln`.
+1. Open `DLL Injector.sln`.
 2. Build in Release (x86 or x64).
 
 Every configuration is already set up.
